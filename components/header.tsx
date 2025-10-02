@@ -1,24 +1,83 @@
-import Link from 'next/link'
-import React from 'react'
+"use client"
 
-export function Header(){
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Menu } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Logo } from "./logo"
+
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/services", label: "Services" },
+  { href: "/process", label: "Process" },
+]
+
+export function Header() {
+  const pathname = usePathname()
+
   return (
-    <header className="sticky top-0 z-40 backdrop-blur bg-black/20 border-b border-white/6">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gradient-to-br from-brand-500 to-accent-500 flex items-center justify-center ring-1 ring-white/6">S</div>
-          <div>
-            <div className="text-sm font-semibold">Spiritus Agentic Solutions</div>
-            <div className="text-xs text-white/60">SAS</div>
+    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-16 items-center">
+        <div className="mr-4 hidden md:flex">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
+            <Logo />
+          </Link>
+          <nav className="flex items-center space-x-6 text-sm font-medium">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "transition-colors hover:text-foreground/80",
+                  pathname === link.href ? "text-foreground" : "text-foreground/60"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+          <div className="md:hidden">
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  <Menu className="h-5 w-5" />
+                  <span className="sr-only">Toggle Menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="pr-0">
+                <Link href="/" className="mr-6 flex items-center space-x-2">
+                  <Logo />
+                </Link>
+                <div className="my-4 h-[calc(100vh-8rem)] pb-10 pl-6">
+                  <div className="flex flex-col space-y-3">
+                    {navLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={cn(
+                          "transition-colors hover:text-foreground/80",
+                          pathname === link.href ? "text-foreground" : "text-foreground/60"
+                        )}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
-        </Link>
-        <nav className="hidden md:flex gap-6 items-center">
-          <Link href="#">Landing</Link>
-          <Link href="/services">Services</Link>
-          <Link href="/process">Process</Link>
-        </nav>
-        <div className="md:hidden">
-          <button aria-label="Open menu" className="p-2 rounded-md bg-white/3">Menu</button>
+          <nav className="hidden md:flex items-center">
+            <Button variant="ghost" asChild>
+              <Link href="/contact">Contact Us</Link>
+            </Button>
+          </nav>
         </div>
       </div>
     </header>
