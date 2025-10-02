@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight, Bot, Code, Zap } from "lucide-react";
+import { FadeInOnView } from "@/components/FadeInOnView";
+import Link from "next/link";
 
 export default function Page() {
   return (
@@ -16,20 +18,27 @@ export default function Page() {
           <div className="container px-4 md:px-6">
             <div className="grid gap-8 md:grid-cols-2 md:gap-16">
               <div className="flex flex-col justify-center space-y-6">
-                <h1 className="text-4xl font-bold tracking-tighter font-display sm:text-5xl md:text-6xl lg:text-7xl text-glow">
-                  Spiritus Agentic Solutions
-                </h1>
-                <p className="max-w-[600px] text-muted-foreground md:text-xl">
-                  We build and deploy autonomous AI agents to automate complex
-                  business processes and drive transformative results.
-                </p>
+                <FadeInOnView
+                  as="h1"
+                  className="text-4xl font-bold tracking-tighter font-display sm:text-5xl md:text-6xl lg:text-7xl text-glow"
+                >
+                  AI, custom-built for African realities.
+                </FadeInOnView>
+                <FadeInOnView
+                  as="p"
+                  className="max-w-[600px] text-muted-foreground md:text-xl delay-150"
+                >
+                  We design, deploy, and scale autonomous digital employees—AI agents that take action, not just provide insights—so businesses in Southern Africa grow with lower cost, higher control, and faster decisions.
+                </FadeInOnView>
                 <div className="flex flex-col gap-4 sm:flex-row">
-                  <Button size="lg" className="group">
-                    Request a Demo
-                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  <Button size="lg" className="group" asChild>
+                    <Link href="/contact">
+                      Request a Demo
+                      <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                    </Link>
                   </Button>
-                  <Button variant="secondary" size="lg">
-                    Learn More
+                  <Button variant="secondary" size="lg" asChild>
+                    <Link href="/services">Learn More</Link>
                   </Button>
                 </div>
               </div>
@@ -49,20 +58,18 @@ export default function Page() {
                   Our Services
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter font-display sm:text-5xl">
-                  Accelerate Your Business with AI
+                  Operational AI, delivered as digital employees
                 </h2>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  From automating repetitive tasks to unlocking new strategic
-                  insights, our AI agents are designed to integrate seamlessly
-                  into your operations.
+                  Plug into your existing stack and orchestrate end-to-end workflows. Our autonomous agents perceive, decide, and act with approvals and full audit trails—so you see measurable ROI without changing how your teams work.
                 </p>
               </div>
             </div>
             <div className="grid gap-6 mt-12 md:grid-cols-2 lg:grid-cols-3">
-              <Card>
+              <Card className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgba(31,176,255,0.35)]">
                 <CardHeader>
                   <div className="flex items-center gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
+                    <div className="bg-primary/10 p-3 rounded-full transition-transform duration-300 group-hover:scale-110">
                       <Bot className="w-6 h-6 text-primary" />
                     </div>
                     <CardTitle>Agentic Workflows</CardTitle>
@@ -70,16 +77,14 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    We design and implement autonomous agentic systems that
-                    streamline complex workflows, from data processing to
-                    customer service.
+                    Pre-built, custom-tuned autonomous digital employees that perceive → decide → act across Sales, Finance, and Operations—lead qualification, 3-way match and reconciliations, pick/pack and delivery orchestration with approvals and audit trails by design.
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgba(31,176,255,0.35)]">
                 <CardHeader>
                   <div className="flex items-center gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
+                    <div className="bg-primary/10 p-3 rounded-full transition-transform duration-300 group-hover:scale-110">
                       <Zap className="w-6 h-6 text-primary" />
                     </div>
                     <CardTitle>Automation & Integration</CardTitle>
@@ -87,16 +92,14 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    Our agents seamlessly integrate with your existing tools
-                    and platforms, automating manual processes and boosting
-                    efficiency.
+                    Plug into your existing CRM/ERP/accounting stack—WhatsApp/HubSpot, Sage/Xero/Zoho, bank feeds via Stitch, and payments via Paystack/Flutterwave/Stripe while enforcing maker-checker controls, approvals, and full activity logs at every step.
                   </CardDescription>
                 </CardContent>
               </Card>
-              <Card>
+              <Card className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_rgba(31,176,255,0.35)]">
                 <CardHeader>
                   <div className="flex items-center gap-4">
-                    <div className="bg-primary/10 p-3 rounded-full">
+                    <div className="bg-primary/10 p-3 rounded-full transition-transform duration-300 group-hover:scale-110">
                       <Code className="w-6 h-6 text-primary" />
                     </div>
                     <CardTitle>Custom AI Development</CardTitle>
@@ -104,9 +107,7 @@ export default function Page() {
                 </CardHeader>
                 <CardContent>
                   <CardDescription>
-                    We offer bespoke AI solutions, building custom models and
-                    agents tailored to your unique business challenges and
-                    goals.
+                    Agents tailored to your data, SOPs, and regulatory context : start with a 4–8 week pilot to prove KPIs, then scale in waves once ROI is visible.
                   </CardDescription>
                 </CardContent>
               </Card>
@@ -126,9 +127,11 @@ export default function Page() {
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
-              <Button size="lg" className="w-full group">
-                Get in Touch
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Button size="lg" className="w-full group" asChild>
+                <Link href="/contact">
+                  Get in Touch
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
           </div>

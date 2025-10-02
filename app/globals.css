@@ -2,78 +2,84 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  :root {
-    --background: 222 47% 11%;
-    --foreground: 210 100% 95%;
+/* === Brand Tokens (shadcn) ===
+   We theme the site by setting CSS variables used by Tailwind classes like
+   bg-background, text-foreground, bg-primary, border-border, etc.
+*/
 
-    --card: 222 47% 11%;
-    --card-foreground: 210 100% 95%;
+:root {
+  /* Light mode (kept sane if you ever enable it) */
+  --background: 0 0% 100%;
+  --foreground: 222 47% 11%;
 
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 100% 95%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215 16% 47%;
 
-    --primary: 300 100% 50%;
-    --primary-foreground: 210 100% 95%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 47% 11%;
 
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 222 47% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 47% 11%;
 
-    --muted: 275 23% 25%;
-    --muted-foreground: 210 100% 80%;
+  /* Primary brand (electric blue) */
+  --primary: 201 100% 56%;
+  /* #1fb0ff */
+  --primary-foreground: 215 75% 8%;
+  /* ~#071724 for contrast */
 
-    --accent: 180 100% 50%;
-    --accent-foreground: 222 47% 11%;
+  --secondary: 215 16% 47%;
+  --secondary-foreground: 0 0% 100%;
 
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 100% 95%;
+  --accent: 201 100% 56%;
+  --accent-foreground: 215 75% 8%;
 
-    --border: 275 23% 25%;
-    --input: 275 23% 25%;
-    --ring: 300 100% 50%;
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
 
-    --radius: 0.5rem;
-  }
+  --border: 219 28% 24%;
+  /* subtle dark blue border */
+  --input: 219 28% 24%;
+  --ring: 201 100% 56%;
 
-  .dark {
-    --background: 222 47% 11%;
-    --foreground: 210 100% 95%;
-
-    --card: 222 47% 11%;
-    --card-foreground: 210 100% 95%;
-
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 100% 95%;
-
-    --primary: 300 100% 50%;
-    --primary-foreground: 210 100% 95%;
-
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 222 47% 11%;
-
-    --muted: 275 23% 25%;
-    --muted-foreground: 210 100% 80%;
-
-    --accent: 180 100% 50%;
-    --accent-foreground: 222 47% 11%;
-
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 210 100% 95%;
-
-    --border: 275 23% 25%;
-    --input: 275 23% 25%;
-    --ring: 300 100% 50%;
-
-    --radius: 0.5rem;
-  }
+  --radius: 0.75rem;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
+/* Dark mode — default look */
+.dark {
+  --background: 216 44% 9%;
+  /* ~#0b1220 */
+  --foreground: 210 40% 96%;
+  /* near-white */
+
+  --muted: 215 28% 17%;
+  --muted-foreground: 215 20% 65%;
+
+  --popover: 216 44% 9%;
+  --popover-foreground: 210 40% 96%;
+
+  --card: 216 44% 9%;
+  --card-foreground: 210 40% 96%;
+
+  --primary: 201 100% 56%;
+  /* #1fb0ff */
+  --primary-foreground: 215 75% 8%;
+  /* contrast text on primary */
+
+  --secondary: 217 18% 20%;
+  --secondary-foreground: 210 40% 96%;
+
+  --accent: 201 100% 56%;
+  --accent-foreground: 215 75% 8%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 219 28% 24%;
+  --input: 219 28% 24%;
+  --ring: 201 100% 56%;
+}
+
+/* Optional: ensure dark look even without a toggle */
+html {
+  color-scheme: dark;
 }

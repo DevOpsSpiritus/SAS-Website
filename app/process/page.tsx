@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ArrowRight, CheckCircle, Milestone } from "lucide-react";
+import Link from "next/link";
 
 const processSteps = [
   {
@@ -63,51 +64,35 @@ export default function ProcessPage() {
               </div>
             </div>
             <div className="relative mt-12">
-              <div
-                className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-border"
-                aria-hidden="true"
-              />
-              <div className="space-y-12">
-                {processSteps.map((step, index) => (
-                  <div
-                    key={step.step}
-                    className="relative grid md:grid-cols-2 gap-8 items-center"
-                  >
-                    <div
-                      className={`flex flex-col gap-4 ${
-                        index % 2 === 0 ? "md:order-1" : "md:order-2"
-                      }`}
-                    >
-                      <div className="flex items-center gap-4">
-                        <div className="flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 border border-primary/20">
-                          <span className="text-xl font-bold font-display text-primary">
-                            {step.step}
+              {/* center line */}
+              <div className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-border" aria-hidden="true" />
+
+              <ol className="space-y-10">
+                {processSteps.map((step) => (
+                  <li key={step.step} className="relative">
+                    {/* dot on the line */}
+                    <div className="absolute left-1/2 top-3 -translate-x-1/2 z-10 h-4 w-4 rounded-full bg-background border-2 border-primary" />
+
+                    {/* card */}
+                    <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-[auto,1fr] items-start">
+                      <div className="hidden md:block pt-1 text-sm font-semibold text-primary w-20 text-right">
+                        Step {step.step}
+                      </div>
+                      <div className="rounded-2xl border border-border bg-muted/10 p-6 transition-colors">
+                        <div className="flex items-center gap-3">
+                          <span className="md:hidden inline-block text-sm font-semibold text-primary">
+                            Step {step.step}
                           </span>
+                          <h3 className="text-xl font-semibold">{step.title}</h3>
                         </div>
-                        <h3 className="text-2xl font-bold font-display">
-                          {step.title}
-                        </h3>
-                      </div>
-                      <p className="text-muted-foreground">
-                        {step.description}
-                      </p>
-                    </div>
-                    <div
-                      className={`hidden md:flex items-center justify-center ${
-                        index % 2 === 0 ? "md:order-2" : "md:order-1"
-                      }`}
-                    >
-                      <div className="w-32 h-32 bg-muted/20 rounded-full flex items-center justify-center">
-                        <Milestone className="w-16 h-16 text-primary/50" />
+                        <p className="mt-2 text-muted-foreground">{step.description}</p>
                       </div>
                     </div>
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-background border-2 border-primary flex items-center justify-center">
-                      <CheckCircle className="w-4 h-4 text-primary" />
-                    </div>
-                  </div>
+                  </li>
                 ))}
-              </div>
+              </ol>
             </div>
+
           </div>
         </section>
 
@@ -123,9 +108,15 @@ export default function ProcessPage() {
               </p>
             </div>
             <div className="mx-auto w-full max-w-sm space-y-2">
-              <Button size="lg" className="w-full group">
-                Schedule a Consultation
-                <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+              <Button
+                size="lg"
+                className="w-full group transition-all duration-300 will-change-transform hover:-translate-y-0.5 hover:shadow-[0_12px_30px_-12px_rgba(31,176,255,0.45)] hover:brightness-110"
+                asChild
+              >
+                <Link href="/contact">
+                  Schedule a Consultation
+                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                </Link>
               </Button>
             </div>
           </div>
