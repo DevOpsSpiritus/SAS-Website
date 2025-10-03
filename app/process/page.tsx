@@ -1,14 +1,15 @@
+// app/process/page.tsx
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ArrowRight, CheckCircle, Milestone } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
+
+const InfiniteScroll = dynamic(() => import("@/components/InfiniteScroll"), {
+  ssr: false,
+});
+const Particles = dynamic(() => import("@/components/particles"), { ssr: false });
+// Single source of truth
 const processSteps = [
   {
     step: 1,
@@ -44,58 +45,76 @@ const processSteps = [
 
 export default function ProcessPage() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="relative flex flex-col min-h-screen">
+      {/* Full-screen particles background (behind everything) */}
+      <div className="fixed inset-0 -z-10 pointer-events-none">
+        <Particles
+          // make it *very* subtle
+          className="opacity-50"        // tweak to opacity-15/20 if you want a bit more
+          particleColors={["#FFFFFF"]}  // single soft color
+          particleCount={500}           // fewer points
+          particleBaseSize={50}         // smaller points
+          particleSpread={10}
+
+          // make it fully static + non-interactive
+          speed={0.01}                     // no time-based motion
+          disableRotation={false}        // no rotation
+          moveParticlesOnHover={false}  // ignores the mouse
+          alphaParticles={false}         // soft-edged dots with alpha
+        />
+      </div>
       <main className="flex-1">
-        <section className="py-12 md:py-24 lg:py-32">
+        {/* Header */}
+        <section className="py-12 md:py-24 lg:py-28">
           <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center justify-center space-y-4 text-center">
+            <div className="flex flex-col items-center justify-center text-center space-y-4">
               <div className="space-y-2">
                 <div className="inline-block rounded-lg bg-muted px-3 py-1 text-sm">
                   Our Process
                 </div>
-                <h2 className="text-3xl font-bold tracking-tighter font-display sm:text-5xl">
+                <h1 className="text-3xl font-bold tracking-tighter font-display sm:text-5xl">
                   A Partnership for Transformation
-                </h2>
+                </h1>
                 <p className="max-w-[900px] text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
                   Our collaborative process ensures that we deliver solutions
                   that are not only technologically advanced but also perfectly
                   aligned with your strategic goals.
                 </p>
               </div>
-            </div>
-            <div className="relative mt-12">
-              {/* center line */}
-              <div className="absolute left-1/2 top-0 -translate-x-1/2 h-full w-px bg-border" aria-hidden="true" />
 
-              <ol className="space-y-10">
-                {processSteps.map((step) => (
-                  <li key={step.step} className="relative">
-                    {/* dot on the line */}
-                    <div className="absolute left-1/2 top-3 -translate-x-1/2 z-10 h-4 w-4 rounded-full bg-background border-2 border-primary" />
-
-                    {/* card */}
-                    <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-[auto,1fr] items-start">
-                      <div className="hidden md:block pt-1 text-sm font-semibold text-primary w-20 text-right">
-                        Step {step.step}
-                      </div>
-                      <div className="rounded-2xl border border-border bg-muted/10 p-6 transition-colors">
-                        <div className="flex items-center gap-3">
-                          <span className="md:hidden inline-block text-sm font-semibold text-primary">
-                            Step {step.step}
-                          </span>
-                          <h3 className="text-xl font-semibold">{step.title}</h3>
+              {/* Infinite Scroll with your steps */}
+              <div className="w-full flex justify-center pt-6">
+                <InfiniteScroll
+                  width="34rem"
+                  maxHeight="70vh"
+                  negativeMargin="-0.75rem"
+                  itemMinHeight={140}
+                  isTilted
+                  tiltDirection="left"
+                  autoplay
+                  autoplaySpeed={0.6}
+                  autoplayDirection="down"  // should move downward; see note above
+                  pauseOnHover
+                  items={processSteps.map((s) => ({
+                    content: (
+                      <div className="w-full text-left">
+                        <div className="text-xs uppercase tracking-wide text-primary/80">
+                          Step {s.step}
                         </div>
-                        <p className="mt-2 text-muted-foreground">{step.description}</p>
+                        <div className="text-lg font-semibold">{s.title}</div>
+                        <div className="text-sm opacity-80 mt-1">{s.description}</div>
                       </div>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
+                    ),
+                  }))}
+                />
+              </div>
 
+              <p className="text-sm opacity-70">Drag, scroll, or hover to pause.</p>
+            </div>
           </div>
         </section>
 
+        {/* CTA */}
         <section className="py-12 md:py-24 lg:py-32 bg-muted/20">
           <div className="container grid items-center justify-center gap-4 px-4 text-center md:px-6">
             <div className="space-y-3">

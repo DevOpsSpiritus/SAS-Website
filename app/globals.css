@@ -83,3 +83,9 @@
 html {
   color-scheme: dark;
 }
+
+/* app/globals.css */
+:root {
+  --accent-color: hsl(var(--primary));
+  /* or your brand hex */
+}
