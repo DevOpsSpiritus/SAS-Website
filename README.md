@@ -1,99 +1,127 @@
+````markdown
 # Spiritus Agentic Solutions — Frontend (Next.js + Tailwind)
 
-This repository is a Next.js (App Router) TypeScript frontend scaffold for Spiritus Agentic Solutions (SAS).
+Next.js (App Router) + TypeScript frontend for **Spiritus Agentic Solutions (SAS)** with Tailwind and shadcn-style conventions.
 
-## Quick start (developer)
+## What’s new (Oct 2025)
+- **Process page revamp**
+  - **InfiniteScroll** (GSAP) vertical card rail.
+  - **Subtle, static Particles background** (OGL) — non-interactive by default.
+- Consolidated process steps, client-only dynamic imports, spacing/copy tweaks.
 
-Requirements
-- Node.js 18+ (LTS recommended)
-- npm (comes with Node.js) or pnpm/yarn if you prefer — this README uses npm commands
+## Requirements
+- Node.js 18+
+- npm (or pnpm/yarn)
 
-Local install
-
-```powershell
-# from repository root
+## Quick start
+```bash
 npm install
-```
+npm run dev   # http://localhost:3000
+````
 
-Run development server
+### Type check
 
-```powershell
-npm run dev
-
-# open http://localhost:3000
-```
-
-Type check
-
-```powershell
+```bash
 npm run typecheck
 ```
 
-Build for production
+### Production
 
-```powershell
+```bash
 npm run build
 npm run start
 ```
 
-Linting and formatting
+## Project structure
 
-- ESLint and Prettier may not be fully configured in this scaffold depending on installed dev dependencies. If you re-enable them, run your chosen lint/format commands, for example:
+```
+app/                 # App Router pages/layouts
+  process/           # Process page (revamped)
+components/
+  InfiniteScroll.tsx # GSAP scroller (client)
+  particles.tsx      # OGL particles background (client, lowercase filename)
+public/
+app/globals.css
+tailwind.config.ts
+```
 
-```powershell
+## Process page components
+
+### Infinite Scroll (example)
+
+```tsx
+<InfiniteScroll
+  width="clamp(22rem, 92vw, 56rem)"
+  maxHeight="78vh"
+  negativeMargin="0.75rem"
+  itemMinHeight={220}
+  isTilted
+  tiltDirection="left"
+  autoplay
+  autoplayDirection="down"
+  autoplaySpeed={0.18}
+  pauseOnHover
+  items={processSteps.map(s => ({
+    content: (
+      <div className="w-full text-left p-6 md:p-8">
+        <div className="text-sm md:text-base uppercase tracking-wide text-primary/80">
+          Step {s.step}
+        </div>
+        <div className="text-2xl md:text-3xl font-semibold mt-1">{s.title}</div>
+        <div className="text-base md:text-lg leading-relaxed opacity-90 mt-3">
+          {s.description}
+        </div>
+      </div>
+    )
+  }))}
+/>
+```
+
+### Particles background (subtle + static)
+
+```tsx
+<div className="fixed inset-0 -z-10 pointer-events-none">
+  <Particles
+    className="opacity-10"
+    particleColors={["#9FD6FF"]}   // light blue
+    particleCount={120}
+    particleBaseSize={60}
+    particleSpread={10}
+    speed={0}                      // static
+    disableRotation={true}         // static
+    moveParticlesOnHover={false}   // non-interactive
+    alphaParticles={true}
+  />
+</div>
+```
+
+## Scripts
+
+```bash
+npm run dev
+npm run build
+npm run start
+npm run typecheck
+# if configured:
 npm run lint
 npm run format
 ```
 
-Project structure
-- `app/` — Next.js App Router pages and layout
-- `components/` — React UI components (Header, Footer, Hero, ServiceCard, ProcessStep, etc.)
-- `lib/` — small utilities (SEO helpers)
-- `public/` — static assets (OG image)
-- `styles/` or `app/globals.css` — global styles and Tailwind imports
-- `tailwind.config.ts` — Tailwind configuration
+## Troubleshooting
 
-Notes and developer tips
-- A `.gitignore` was added and large build artifacts (like `.next/`) were accidentally committed and then removed — this is cleaned up in the latest commits.
-- If you see editor warnings about Tailwind `@` rules, install the Tailwind CSS IntelliSense extension for VS Code or enable stylelint configuration.
-- If you plan to use `shadcn/ui`, the CLI was attempted and may need running locally to complete the interactive setup. The following commands are what was attempted:
+* **ogl not found** → `npm i ogl`
+* **Particles not visible** → ensure wrapper `fixed inset-0 -z-10 pointer-events-none`; temporarily bump `particleCount`, `particleBaseSize`, or `opacity`.
+* **SSR/window errors** → `InfiniteScroll` and `particles` are client components, dynamically imported with `{ ssr: false }`.
+* **Case issues on Vercel/Linux** → file is `components/particles.tsx` (lowercase) and import is `@/components/particles`.
 
-```powershell
-npx shadcn@latest init -y
-npx shadcn@latest add button card sheet
+## Contributing
+
+* Branch → commit → PR (protect `main`, require 1+ review). Enable preview deployments if using Vercel/Netlify.
+
+## License
+
+TBD
+
 ```
-
-Commit and contribution
-- The repository has been pushed to GitHub (owner: `Adonis278`). If you clone this repo elsewhere, set your git user name and email:
-
-```powershell
-git config --global user.name "Your Name"
-git config --global user.email "you@example.com"
+::contentReference[oaicite:0]{index=0}
 ```
-
-Troubleshooting
-- If `npm install` fails with ETARGET or version errors, edit `package.json` to relax exact version pins and re-run install. This project has been through some iterative fixes to get dependencies to install across different environments.
-- If the dev server fails with errors about `next.config.mjs`, ensure it's exporting a default config object (no named `defineConfig` import) and that unsupported experimental flags are not set for your Next.js version.
-
-Contact
-- For help with this repo, reply here or open an issue in the GitHub repository.
-# Spiritus Agentic Solutions (SAS) — MVP
-
-Next.js + TypeScript + Tailwind + shadcn-style scaffold with a futuristic agentic-AI aesthetic.
-
-Quickstart
-
-1. Install dependencies (I prefer pnpm):
-
-```powershell
-npm install
-npm run dev
-```
-
-The app uses the App Router. Pages: `/` (landing), `/services`, `/process`.
-
-Notes
-
-- This is an initial scaffold with accessibility, tokens, and components. Run `npm run typecheck` and `npm run lint` after installing dependencies.
-# Spiritus-Agentic-Solutions
-Spiritus Agentic Solutions Website
