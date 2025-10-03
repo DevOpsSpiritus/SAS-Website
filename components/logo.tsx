@@ -1,17 +1,19 @@
-import { cn } from "@/lib/utils"
-import { Orbitron } from "next/font/google"
+import Image from "next/image";
 
-const orbitron = Orbitron({ subsets: ["latin"] })
-
-export function Logo() {
-  return (
-    <div className="flex items-center gap-2">
-      <div className="w-8 h-8 rounded-full bg-primary/10 border border-primary/50 flex items-center justify-center">
-        <div className="font-bold text-primary text-lg">S</div>
-      </div>
-      <div className={cn("text-lg font-bold text-primary", orbitron.className)}>
-        Spiritus
-      </div>
-    </div>
-  )
+export function Logo({ size = 28 }: { size?: number }) {
+    return (
+        <div className="flex items-center gap-2">
+            <Image
+                src="/brand/logo.png" // maps to /public/brand/logo.png
+                alt="Spiritus Agentic Solutions"
+                width={size}
+                height={size}
+                className="rounded-md"
+                priority
+            />
+            <span className="hidden sm:inline text-sm font-semibold tracking-wide">
+                Spiritus Agentic Solutions
+            </span>
+        </div>
+    );
 }
