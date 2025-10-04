@@ -14,8 +14,28 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1">
-        <section className="relative py-20 md:py-32 lg:py-40 bg-grid-small-white/[0.05]">
-          <div className="container px-4 md:px-6">
+        <section className="relative py-20 md:py-32 lg:py-40 bg-grid-small-white/[0.05] overflow-hidden">
+          {/* Background video - placed behind the hero content */}
+          {/* Desktop/tablet video - hidden on small screens to conserve bandwidth */}
+          <video
+            className="hidden sm:block absolute inset-0 w-full h-full object-cover pointer-events-none -z-10"
+            src="/hero.mp4"
+            preload="metadata"
+            poster="/og.png"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          />
+          {/* Mobile fallback poster image shown only on small screens */}
+          <picture className="block sm:hidden absolute inset-0 -z-10">
+            <img src="/og.png" alt="Spiritus hero" className="w-full h-full object-cover" />
+          </picture>
+          {/* subtle dark overlay so text remains readable */}
+          <div className="absolute inset-0 bg-black/30 pointer-events-none z-0" />
+
+          <div className="container px-4 md:px-6 relative z-10">
             <div className="grid gap-8 md:grid-cols-2 md:gap-16">
               <div className="flex flex-col justify-center space-y-6">
                 <FadeInOnView

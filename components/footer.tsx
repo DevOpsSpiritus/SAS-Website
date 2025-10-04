@@ -5,8 +5,8 @@ import { Button } from "./ui/button";
 export function Footer() {
   return (
     <footer className="border-t border-border/40">
-      <div className="container flex items-center justify-between py-6">
-        <div>
+      <div className="container flex flex-col md:flex-row items-center justify-between py-6 gap-4">
+        <div className="flex flex-col items-start">
           <Logo />
           <p className="text-sm text-muted-foreground mt-2">
             © {new Date().getFullYear()} Spiritus Agentic Solutions. All rights reserved.
