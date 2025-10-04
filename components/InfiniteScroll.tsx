@@ -2,7 +2,7 @@
 
 import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { Observer } from 'gsap/Observer';
+import { Observer } from 'gsap/all';
 
 gsap.registerPlugin(Observer);
 
@@ -54,7 +54,7 @@ export default function InfiniteScroll({
         const container = containerRef.current;
         if (!container || items.length === 0) return;
 
-        const divItems = gsap.utils.toArray<HTMLElement>(container.children as any);
+    const divItems = gsap.utils.toArray<HTMLElement>(container.children as unknown as Element[]);
         if (!divItems.length) return;
 
         // equal heights keep wrap math stable
@@ -124,8 +124,12 @@ export default function InfiniteScroll({
             rafId = requestAnimationFrame(tick);
 
             if (pauseOnHover) {
-                const stopTicker = () => rafId && cancelAnimationFrame(rafId);
-                const startTicker = () => (rafId = requestAnimationFrame(tick));
+                const stopTicker = () => {
+                    if (rafId) cancelAnimationFrame(rafId);
+                };
+                const startTicker = () => {
+                    rafId = requestAnimationFrame(tick);
+                };
 
                 container.addEventListener('mouseenter', stopTicker);
                 container.addEventListener('mouseleave', startTicker);

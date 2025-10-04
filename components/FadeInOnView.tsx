@@ -6,6 +6,7 @@ import {
     useState,
     type ElementType,
     type ComponentPropsWithoutRef,
+    type RefObject,
 } from "react";
 import { cn } from "@/lib/utils";
 
@@ -49,7 +50,7 @@ export function FadeInOnView<T extends ElementType = "div">({
 
     return (
         <Tag
-            ref={ref as any}
+            ref={ref as unknown as RefObject<HTMLElement>}
             className={cn(
                 "opacity-0 translate-y-4 transition-all duration-500 ease-out will-change-transform will-change-opacity",
                 "motion-reduce:transition-none motion-reduce:opacity-100 motion-reduce:translate-y-0",
