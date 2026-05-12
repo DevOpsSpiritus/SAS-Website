@@ -1,19 +1,28 @@
 import Image from "next/image";
 
-export function Logo({ size = 28 }: { size?: number }) {
-    return (
-        <div className="flex items-center gap-2">
-            <Image
-                src="/brand/logo.png" // maps to /public/brand/logo.png
-                alt="Spiritus Agentic Solutions"
-                width={size}
-                height={size}
-                className="rounded-md"
-                priority
-            />
-            <span className="hidden sm:inline text-sm font-semibold tracking-wide">
-                Spiritus Agentic Solutions
-            </span>
-        </div>
-    );
+export function Logo({ size = 32 }: { size?: number }) {
+  return (
+    <div className="flex items-center gap-2.5">
+      <Image
+        src="/brand/logo.png"
+        alt=""
+        width={size}
+        height={size}
+        className="rounded-md object-cover shrink-0"
+        priority
+      />
+      <span
+        className="font-bold tracking-tight text-foreground leading-none"
+        style={{ fontSize: size * 0.56 }}
+      >
+        spiritus
+        <span className="block text-muted-foreground font-normal tracking-[0.18em] uppercase" style={{ fontSize: size * 0.28 }}>
+          agentic solutions
+        </span>
+      </span>
+    </div>
+  );
 }
+
+
+

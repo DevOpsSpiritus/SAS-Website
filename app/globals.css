@@ -2,82 +2,109 @@
 @tailwind components;
 @tailwind utilities;
 
-/* === Brand Tokens (shadcn) ===
-   We theme the site by setting CSS variables used by Tailwind classes like
-   bg-background, text-foreground, bg-primary, border-border, etc.
-*/
+/* ============================================================
+   Spiritus Agentic Solutions — Brand Tokens
+   Main:   Unify Blue #008ad1 | Spiritus Gray #36373d
+           Solid Black #000000 | Focus White #ffffff
+   Accent: Africa Gold #e0af00 | Tailor Red #a00000
+   Fonts:  Outfit Bold (titles) · Outfit Medium (headings)
+   ============================================================ */
 
 :root {
-  /* Light mode (kept sane if you ever enable it) */
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
+  /* Near-black base — richer than pure black, like the brand doc */
+  --background: 230 8% 7%;          /* #10111a */
+  --foreground: 0 0% 95%;           /* #f2f2f2 */
 
-  --muted: 210 40% 96.1%;
-  --muted-foreground: 215 16% 47%;
+  --muted: 231 6% 14%;              /* #212228 */
+  --muted-foreground: 220 8% 58%;   /* soft gray */
 
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
+  --popover: 230 8% 9%;
+  --popover-foreground: 0 0% 95%;
 
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
+  --card: 231 6% 12%;               /* #1b1c21 */
+  --card-foreground: 0 0% 95%;
 
-  /* Primary brand (electric blue) */
-  --primary: 201 100% 56%;
-  /* #1fb0ff */
-  --primary-foreground: 215 75% 8%;
-  /* ~#071724 for contrast */
+  /* Unify Blue: #008ad1 = hsl(200, 100%, 41%) */
+  --primary: 200 100% 41%;
+  --primary-foreground: 0 0% 100%;
 
-  --secondary: 215 16% 47%;
-  --secondary-foreground: 0 0% 100%;
+  /* Spiritus Gray: #36373d = hsl(231, 6%, 22%) */
+  --secondary: 231 6% 22%;
+  --secondary-foreground: 0 0% 95%;
 
-  --accent: 201 100% 56%;
-  --accent-foreground: 215 75% 8%;
+  /* Africa Gold: #e0af00 = hsl(47, 100%, 44%) */
+  --accent: 47 100% 44%;
+  --accent-foreground: 230 8% 7%;
 
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
+  /* Tailor Red: #a00000 = hsl(0, 100%, 31%) */
+  --destructive: 0 100% 31%;
+  --destructive-foreground: 0 0% 95%;
 
-  --border: 219 28% 24%;
-  /* subtle dark blue border */
-  --input: 219 28% 24%;
-  --ring: 201 100% 56%;
+  --border: 231 6% 19%;
+  --input: 231 6% 19%;
+  --ring: 200 100% 41%;
 
   --radius: 0.75rem;
 }
 
-/* Dark mode — default look */
-.dark {
-  --background: 216 44% 9%;
-  /* ~#0b1220 */
-  --foreground: 210 40% 96%;
-  /* near-white */
-
-  --muted: 215 28% 17%;
-  --muted-foreground: 215 20% 65%;
-
-  --popover: 216 44% 9%;
-  --popover-foreground: 210 40% 96%;
-
-  --card: 216 44% 9%;
-  --card-foreground: 210 40% 96%;
-
-  --primary: 201 100% 56%;
-  /* #1fb0ff */
-  --primary-foreground: 215 75% 8%;
-  /* contrast text on primary */
-
-  --secondary: 217 18% 20%;
-  --secondary-foreground: 210 40% 96%;
-
-  --accent: 201 100% 56%;
-  --accent-foreground: 215 75% 8%;
-
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 40% 98%;
-
-  --border: 219 28% 24%;
-  --input: 219 28% 24%;
-  --ring: 201 100% 56%;
+/* Force dark mode globally — Spiritus is a dark-first brand */
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
 }
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* ── Utility classes ── */
+@layer utilities {
+  .text-glow {
+    text-shadow:
+      0 0 40px hsl(200 100% 41% / 0.45),
+      0 0 80px hsl(200 100% 41% / 0.2);
+  }
+  .glow-blob {
+    background: radial-gradient(
+      ellipse at 50% 40%,
+      hsl(200 100% 41% / 0.1) 0%,
+      transparent 65%
+    );
+  }
+  .card-border-glow {
+    box-shadow:
+      0 0 0 1px hsl(200 100% 41% / 0.25),
+      0 8px 32px -8px hsl(200 100% 41% / 0.2);
+  }
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes float-b {
+  0%, 100% { transform: translateY(-5px); }
+  50%       { transform: translateY(5px); }
+}
+@keyframes float-c {
+  0%, 100% { transform: translateY(-2px); }
+  50%       { transform: translateY(8px); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.animate-float   { animation: float   4s ease-in-out infinite; }
+.animate-float-b { animation: float-b 5.5s ease-in-out infinite; }
+.animate-float-c { animation: float-c 7s ease-in-out infinite; }
 
 /* Optional: ensure dark look even without a toggle */
 html {

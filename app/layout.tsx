@@ -1,18 +1,20 @@
 import type { Metadata } from "next";
-import { Inter, Orbitron } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
-import { ParticlesBg } from "@/components/particles-bg";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
-const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-display" });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+});
 
 export const metadata: Metadata = {
-  title: "Spiritus Agentic Solutions",
+  title: "Spiritus Agentic Solutions | Autonomous AI Agents for Business",
   description:
-    "We build and deploy autonomous AI agents to automate complex business processes.",
+    "We create, implement, and expand autonomous AI agents — digital employees that not only deliver insights but take decisive action. Built for growing businesses worldwide.",
 };
 
 export default function RootLayout({
@@ -25,11 +27,9 @@ export default function RootLayout({
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
-          inter.variable,
-          orbitron.variable
+          outfit.variable
         )}
       >
-        <ParticlesBg />
         <Header />
         <main>{children}</main>
         <Footer />

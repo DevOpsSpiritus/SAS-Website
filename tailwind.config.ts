@@ -12,6 +12,10 @@ const config: Config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+        display: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -77,6 +81,14 @@ const config: Config = {
           "80%": { transform: "translate(2px, -2px)" },
           "100%": { transform: "translate(0)" },
         },
+        "float": {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+        "float-b": {
+          "0%, 100%": { transform: "translateY(-5px)" },
+          "50%": { transform: "translateY(5px)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -84,6 +96,8 @@ const config: Config = {
         "border-glow": "border-glow 1.5s ease-in-out infinite alternate",
         "fade-in": "fade-in 0.5s ease-in-out",
         "button-glitch": "button-glitch 0.25s linear",
+        "float": "float 4s ease-in-out infinite",
+        "float-b": "float-b 5.5s ease-in-out infinite",
       },
     },
   },
