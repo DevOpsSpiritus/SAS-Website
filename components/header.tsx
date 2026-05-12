@@ -3,7 +3,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Sun, Moon } from "lucide-react"
+import { useTheme } from "next-themes"
 import { cn } from "@/lib/utils"
 import { Logo } from "./logo"
 
@@ -19,6 +20,10 @@ export function Header() {
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const { resolvedTheme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 16)
@@ -66,6 +71,20 @@ export function Header() {
 
         {/* CTA pill — dark, matching Lorikeet style */}
         <div className="flex items-center gap-2 shrink-0">
+          {/* Theme toggle */}
+          {mounted && (
+            <button
+              aria-label="Toggle theme"
+              onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-lg text-foreground/60 hover:text-foreground hover:bg-muted/50 transition-colors"
+            >
+              {resolvedTheme === "dark"
+                ? <Sun className="h-4 w-4" />
+                : <Moon className="h-4 w-4" />
+              }
+            </button>
+          )}
+
           <Link
             href="/contact"
             className={cn(

@@ -10,13 +10,54 @@
    Fonts:  Outfit Bold (titles) · Outfit Medium (headings)
    ============================================================ */
 
+/* ── Light mode ── */
 :root {
-  /* Near-black base — richer than pure black, like the brand doc */
+  color-scheme: light;
+
+  --background: 220 20% 98%;        /* #f7f8fc — warm white */
+  --foreground: 230 8% 10%;         /* near-black text */
+
+  --muted: 220 15% 93%;             /* light gray surfaces */
+  --muted-foreground: 220 8% 44%;   /* subdued text */
+
+  --popover: 0 0% 100%;
+  --popover-foreground: 230 8% 10%;
+
+  --card: 0 0% 100%;                /* white cards */
+  --card-foreground: 230 8% 10%;
+
+  /* Unify Blue: #008ad1 — slightly deepened for light bg contrast */
+  --primary: 200 100% 38%;
+  --primary-foreground: 0 0% 100%;
+
+  /* Spiritus Gray */
+  --secondary: 220 15% 90%;
+  --secondary-foreground: 231 6% 22%;
+
+  /* Africa Gold — deepened for WCAG on white */
+  --accent: 44 100% 38%;
+  --accent-foreground: 230 8% 7%;
+
+  /* Tailor Red */
+  --destructive: 0 100% 31%;
+  --destructive-foreground: 0 0% 100%;
+
+  --border: 220 13% 88%;
+  --input: 220 13% 88%;
+  --ring: 200 100% 38%;
+
+  --radius: 0.75rem;
+}
+
+/* ── Dark mode ── */
+.dark {
+  color-scheme: dark;
+
   --background: 230 8% 7%;          /* #10111a */
   --foreground: 0 0% 95%;           /* #f2f2f2 */
 
   --muted: 231 6% 14%;              /* #212228 */
-  --muted-foreground: 220 8% 58%;   /* soft gray */
+  --muted-foreground: 220 8% 58%;
 
   --popover: 230 8% 9%;
   --popover-foreground: 0 0% 95%;
@@ -24,19 +65,15 @@
   --card: 231 6% 12%;               /* #1b1c21 */
   --card-foreground: 0 0% 95%;
 
-  /* Unify Blue: #008ad1 = hsl(200, 100%, 41%) */
   --primary: 200 100% 41%;
   --primary-foreground: 0 0% 100%;
 
-  /* Spiritus Gray: #36373d = hsl(231, 6%, 22%) */
   --secondary: 231 6% 22%;
   --secondary-foreground: 0 0% 95%;
 
-  /* Africa Gold: #e0af00 = hsl(47, 100%, 44%) */
   --accent: 47 100% 44%;
   --accent-foreground: 230 8% 7%;
 
-  /* Tailor Red: #a00000 = hsl(0, 100%, 31%) */
   --destructive: 0 100% 31%;
   --destructive-foreground: 0 0% 95%;
 
@@ -47,9 +84,7 @@
   --radius: 0.75rem;
 }
 
-/* Force dark mode globally — Spiritus is a dark-first brand */
 html {
-  color-scheme: dark;
   scroll-behavior: smooth;
 }
 
@@ -105,24 +140,3 @@ html {
 .animate-float   { animation: float   4s ease-in-out infinite; }
 .animate-float-b { animation: float-b 5.5s ease-in-out infinite; }
 .animate-float-c { animation: float-c 7s ease-in-out infinite; }
-
-/* Optional: ensure dark look even without a toggle */
-html {
-  color-scheme: dark;
-}
-
-/* app/globals.css */
-:root {
-  --accent-color: hsl(var(--primary));
-  /* or your brand hex */
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
-  }
-}

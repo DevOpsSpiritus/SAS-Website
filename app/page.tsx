@@ -31,15 +31,15 @@ const stats = [
 ];
 
 const integrations = [
-  { name: "WhatsApp", color: "#25D366" },
-  { name: "Sage", color: "#00dc82" },
-  { name: "Xero", color: "#13B5EA" },
-  { name: "HubSpot", color: "#FF7A59" },
-  { name: "Paystack", color: "#00C3F7" },
-  { name: "Stitch", color: "#008ad1" },
-  { name: "Stripe", color: "#635BFF" },
-  { name: "Zoho", color: "#E42527" },
-  { name: "+ more", color: "#e0af00" },
+  { name: "WhatsApp", color: "#25D366", slug: "whatsapp" },
+  { name: "Sage", color: "#00dc82", slug: "sage" },
+  { name: "Xero", color: "#13B5EA", slug: "xero" },
+  { name: "HubSpot", color: "#FF7A59", slug: "hubspot" },
+  { name: "Zendesk", color: "#03363D", slug: "zendesk" },
+  { name: "Jira", color: "#0052CC", slug: "jira" },
+  { name: "Stripe", color: "#635BFF", slug: "stripe" },
+  { name: "Zoho", color: "#E42527", slug: "zoho" },
+  { name: "+\u00a0more", color: "#e0af00", slug: null },
 ];
 
 const processSteps = [
@@ -345,12 +345,25 @@ export default function HomePage() {
                       className="flex flex-col items-center gap-2.5 rounded-xl border border-border/40 bg-background/60 p-3.5 hover:border-border/70 transition-colors"
                     >
                       <div
-                        className="h-9 w-9 rounded-lg"
+                        className="h-9 w-9 rounded-lg flex items-center justify-center"
                         style={{
                           backgroundColor: t.color + "22",
                           border: `1px solid ${t.color}44`,
                         }}
-                      />
+                      >
+                        {t.slug ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={`https://cdn.simpleicons.org/${t.slug}/${t.color.slice(1)}`}
+                            alt={t.name}
+                            width={20}
+                            height={20}
+                            style={{ width: 20, height: 20, flexShrink: 0 }}
+                          />
+                        ) : (
+                          <span className="text-lg font-bold leading-none" style={{ color: t.color }}>+</span>
+                        )}
+                      </div>
                       <span className="text-[10px] text-muted-foreground text-center leading-tight font-medium">
                         {t.name}
                       </span>
