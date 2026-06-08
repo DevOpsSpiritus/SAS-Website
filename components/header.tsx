@@ -48,7 +48,7 @@ export function Header() {
       >
         {/* Logo */}
         <Link href="/" className="shrink-0">
-          <Logo size={32} />
+          <Logo height={32} />
         </Link>
 
         {/* Desktop nav links — centered */}

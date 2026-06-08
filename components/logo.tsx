@@ -1,26 +1,35 @@
-import Image from "next/image";
+"use client";
 
-export function Logo({ size = 32 }: { size?: number }) {
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
+
+export function Logo({ height = 36 }: { height?: number }) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Cropped images: dark 852×308, light 920×336 → aspect ≈ 2.75:1
+  const width = Math.round(height * 2.75);
+
+  const src =
+    !mounted || resolvedTheme === "dark"
+      ? "/brand/logo-lockup-dark.png"
+      : "/brand/logo-lockup-light.png";
+
   return (
-    <div className="flex items-center gap-2.5">
-      <Image
-        src="/brand/logo.png"
-        alt=""
-        width={size}
-        height={size}
-        className="rounded-md object-cover shrink-0"
-        priority
-      />
-      <span
-        className="font-bold tracking-tight text-foreground leading-none"
-        style={{ fontSize: size * 0.56 }}
-      >
-        spiritus
-        <span className="block text-muted-foreground font-normal tracking-[0.18em] uppercase" style={{ fontSize: size * 0.28 }}>
-          agentic solutions
-        </span>
-      </span>
-    </div>
+    <Image
+      src={src}
+      alt="Spiritus Agentic Solutions"
+      width={width}
+      height={height}
+      style={{ width, height }}
+      className="object-contain shrink-0"
+      priority
+    />
   );
 }
 

@@ -24,7 +24,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-10 md:grid-cols-4">
           {/* Brand column */}
           <div className="col-span-2">
-            <Logo size={36} />
+            <Logo height={36} />
             <p className="mt-4 max-w-xs text-sm text-muted-foreground leading-relaxed">
               AI, custom-built for your business reality. We deploy autonomous digital
               employees that take decisive action — not just deliver insights.
